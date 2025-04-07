@@ -1,0 +1,39 @@
+<div class="grid grid-cols-2" data-controller="post">
+  <div class="col-span-1">
+    <div class="p-4 border rounded-md shadow-md mb-4">
+      <span class="text-green-500" data-post-target="welcome"></span>
+      <button data-action="click->post#click">Browse</button>
+      <h3 class="font-bold text-center">Blogs</h3>
+      <div>Total Posts: <span id="post_count"><%= @posts.count %></span></div>
+      <button data-action="click->post#toggle" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
+        Create New Article
+      </button>
+      <div data-post-target="form" class="hidden mt-4">
+        <%= form_with model: Post.new, data: { action: "submit->post#create#clear" } do |f| %>
+          <div class="mb-4">
+            <%= f.label :title %>
+            <%= f.text_field :title, data: { post_target: "title" } %>
+            <span class="text-red-500 hidden" data-post-target="titleError">This field is required</span>
+          </div>
+          <div>
+            <%= f.label :content %>
+            <%= f.text_field :content, data: { post_target: "content" } %>
+            <span class="text-red-500 hidden" data-post-target="contentError">This field is required</span>
+          </div>
+          <%= f.submit "Create", class: "bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition mt-[10px]" %>
+        <% end %>
+      </div>
+    </div>
+
+    <div id="posts" class="">
+      <div class="col-span-1 ml-5">
+        <% @posts.each do |post| %>
+          <%= render partial: "posts/post", locals: { post: post} %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-1 ml-5">
+    <%= turbo_frame_tag :post_details %>
+  </div>
+</div>

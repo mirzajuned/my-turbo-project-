@@ -1,0 +1,7 @@
+<%= turbo_frame_tag :post_details do %>
+  <div class="flex"><span class="font-bold">Title: </span><span> <%= @post.title %></span></div>
+  <div class="flex"><span class="font-bold">Comment: </span><span> <%= @post.content %></span></div>
+  <turbo-frame id="article_<%= article.id %>_status">
+  <p>Status: <%= article.viewed? ? "Viewed ✅" : "New 🆕" %></p>
+</turbo-frame>
+<% end %>
