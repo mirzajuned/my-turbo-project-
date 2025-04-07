@@ -1,14 +1,1 @@
 <%= turbo_stream.replace "notification", partial: "tasks/notification", locals: {content: @message} %>
-
-<%= turbo_stream.update "to_do_tasks_count" do %>
-  <%= @to_do_tasks.try(:count) %>
-<% end %>
-<%= turbo_stream.update "in_progress_tasks_count" do %>
-  <%= @in_progress_tasks.try(:count) %>
-<% end %>
-<%= turbo_stream.update "completed_tasks_count" do %>
-  <%= @completed_tasks.try(:count) %>
-<% end %>
-# <%= turbo_stream.update "progress_bar" do %>
-#   <%= @progress_bar %>
-# <% end %>
